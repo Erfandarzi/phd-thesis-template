@@ -6,11 +6,45 @@
 \newcommand{\sparkline}[1]{$\vcenter{\hbox{\includegraphics[scale=0.04]{#1}}}$}
 
 \makeglossaries
+\usepackage[final]{pdfpages}
+\usepackage{adjustbox}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{doi}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{epstopdf}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{subfig}
 
+
+\newcommand{\greenuparrow}{\textcolor{green}{\rotatebox[origin=c]{0}{$\uparrow$}}}
+\newcommand{\reddownarrow}{\textcolor{red}{\rotatebox[origin=c]{0}{$\downarrow$}}}
+\epstopdfsetup{outdir=./}
+\newcommand\peter[1]{}
+\newcommand\marianna[1]{}
+\newcommand\quickthings[1]{}
+\newcommand\maybelater[1]{}
+
+\epstopdfsetup{update} % only regenerate pdf files when eps file is newer\captionsetup{compatibility=false}
+\usepackage[style=ieee]{biblatex}
+\usepackage[export]{adjustbox}
 \newcommand*{\origrightarrow}{}
 \let\oldarrow\textrightarrow
+\newcommand{\includea}[1]{
+\begin{refsection}
+\include{$\csname #1 \endcsname$}
+\end{refsection}
+}
 \renewcommand*{\textrightarrow}{\fontfamily{cmr}\selectfont\origrightarrow}
 \loadglsentries[main]{glossary}
+\addbibresource{dissertation.bib}
+\addbibresource{Chapter4/references.bib}
 
 \input{abbreviations}
 
@@ -18,34 +52,64 @@
 
 %% Specify the title and author of the thesis. This information will be used on
 %% the title page (in title/title.tex) and in the metadata of the final PDF.
-\title{An Empirical Evaluation of Feedback-Driven Software Development}
-\author{Moritz Marc}{Beller}
+\title{Federated learing in medical image analysis}
+\author{Erfan}{Darzidehkalani}
 
 %% Use Roman numerals for the page numbers of the title pages and table of
 %% contents.
 \frontmatter
 
 \include{title/title}
-
+% 
 %% The (optional) dedication can be used to thank someone or display a
 %% significant quotation.
-\dedication{\epigraph{I [...] like to give the maximum in everything I do. The maximum I have. The
-    maximum I can give. I am not perfect. But if I do something, I do it [as best I can].
-    %And many people are not made like this. There are only few. But I like these few.
-  }{Reinhold Messner}}
+% \dedication{\epigraph{I [...] like to give the maximum in everything I do. The maximum I have. The
+%     maximum I can give. I am not perfect. But if I do something, I do it [as best I can].
+%     %And many people are not made like this. There are only few. But I like these few.
+%   }{Reinhold Messner}}
 
 \tableofcontents
 
-\include{summary/summary}
-\include{acks/acks}
 
 %% Use Arabic numerals for the page numbers of the chapters.
 \mainmatter
 
 %% Turn on thumb indices.
 \thumbtrue
+\part{Introduction}
+\begin{refsection}
 
 \include{introduction/introduction}
+\end{refsection}
+\part{Federated learning in healthcare }
+
+\begin{refsection}
+\include{Chapter2/chapter2}
+\include{Chapter3/chapter3}
+\end{refsection}
+% \include{Chapter3/chapter3}
+\begin{refsection}
+\include{Chapter1/chapter1}
+\end{refsection}
+
+\part{Security of federated networks in medical imaging}
+
+\begin{refsection}
+
+\include{Chapter4/chapter4}
+
+\end{refsection}
+\begin{refsection}
+
+\include{Chapter5/chapter5}
+\end{refsection}
+\begin{refsection}
+
+\part{Federated learning with heterogenous medical data}
+
+\include{Chapter6/chapter6}
+\end{refsection}
+
 \include{conclusion/conclusion}
 
 %% Use letters for the chapter numbers of the appendices.
@@ -56,26 +120,28 @@
 %% Turn off thumb indices for unnumbered chapters.
 \thumbfalse
 
-\chapter*{Bibliography}
-\addcontentsline{toc}{chapter}{Bibliography}
-\setheader{Bibliography}
-
-URLs in this thesis have been archived on Archive.org. Their link target in digital editions refers
-to this timestamped version.
-
-\bibliographystyle{unsrt}
-% argument is your BibTeX string definitions and bibliography database(s)
-\bibliography{dissertation}
+% \chapter*{Bibliography}
+% \addcontentsline{toc}{chapter}{Bibliography}
+% \setheader{Bibliography}
+% URLs in this thesis have been archived on Archive.org. Their link target in digital editions refers
+% to this timestamped version.
+% \printbibliography
+% \cite{grammenos2019federated}
+% \bibliographystyle{unsrt}
+% % \bibliography{dissertation}
 
 %% \chapter*{Glossary}
 
-\glsaddall
-\printglossary[type=\acronymtype,title={Glossary}]
-\addcontentsline{toc}{chapter}{Glossary}
-\setheader{Glossary}
+% \glsaddall
+% \printglossary[type=\acronymtype,title={Glossary}]
+% \addcontentsline{toc}{chapter}{Glossary}
+% \setheader{Glossary}
 
-\include{cv/cv}
+\include{summary/summary}
+\include{acks/acks}
+\include{Author affiliations/author_affiliations}
 \include{publications/publications}
+\include{cv/cv}
 \include{ipa/ipadissertations_2018}
 
 \end{document}

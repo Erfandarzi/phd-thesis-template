@@ -1,0 +1,89 @@
+
+
+\section{Discussion}
+
+Our results admit the prior research about vulnerability of FL networks
+\cite{goldblum2020dataset,liu2022threats,sun2019can,fang2020local,wang2020attack,song2020analyzing,wilkinson2016fair,van2022ai,miotto2016deep,costa2021covert,bouacida2021vulnerabilities} and MI systems 
+ \cite{ma2021understanding,finlayson2019adversarial,gupta2022vulnerability,bortsova2021adversarial}  to adversaraial attacks.
+
+% Our results suggest that even in a DP-enabled setting, adversarial samples generated on one client can be highly transferable.
+
+We also found that differential privacy might have partial effect on attacker's success. In fact, DP caused the lower ASR in surrogate than the adversary clients.
+% But it can not be considered as an effective counter-measure.
+Although some research support DP, our findings suggest that more with ones who describe it as an option but not very reliable. \cite{bouacida2021vulnerabilities}. Also, the accuracy compromise coming with noise should be considered. \cite{canonne2020discrete} \cite{wang2019privacy}.
+\\In our experiments the attacker did not tamper with the training procedure. his is unlike backdoor or poisoning attacks.\cite{lyu2020privacy}\cite{lyu2020threats}. where the attacker performs malicious activities during training, and opens the way for detection methods.
+Also, CRN initialization led to faster attacks with higher transferability. This section discusses our findings, how they could be important in the MI domain, and what to consider when setting up FL MI infrastructure.
+
+
+
+\subsection{Transferability}
+% The practice could be that not always adding noise is better, especially in medical images where compromising accuracy affects patients. Other methods have their problems as stated before, \cite{yin2022adc,yuan2019adversarial,uesato2018adversarial} mainly compromising performance or working in certain conditions. 
+% Further research might consider defense models of FL networks. 
+Our experiments aimed to asses some factors in transferability. However, other than investigated factors, we found three other parameters might highly predict transferability.
+
+\textbf{Benign/Adversary correlation:} Our results show that ASR on benign and adversary clients are highly correlated. Hence, for the adversary to ensure it can fool other clients in a black-box setting, it needs to obtain good results on its own data and model. So tuning the hyperparamets, data preprocessing can be all effective as long as they improve ASR on adversary.
+
+\textbf{AETR/ASR difference:}, Attacks have higher AETR than ASR, which enables the adversary to subsample examples to achieve higher transferability. 
+%. In black-box models, the attack results might vary from low transferability to similar to white-box. Depending on many parameters. But when implementing in a
+% FL environment, the results are closer to the white-box setting. 
+% This finding admits that models trained in FL setting keep their traditional ML vulnerabilities, and FL imposes an additional threat. Leading to aggregated vulnerabilty.\hl{  \faClockOshayad ye graph peyda Koni ke ASR ro ba white/black tozih bede}
+
+\textbf{Attack domain}: We observed that transferability is specific within imaging domains, which is consistent with prior findings.\cite{bortsova2021adversarial} Attacks on Pathology images were consistently more successful than MRI images. 
+
+% \subsection{Effect of parameters}
+\textbf{Perturbation parameter}
+% $\epsilon$  As shown in \ref{fig: epsilon graphs} 
+Level of $\epsilon$ can substantially change transferability. Increasing $\epsilon$ does not improve ASR from a certain point, but adding CRN can increase the dependency. The best perturbation range in our experiments is around 0.03-0.05. These results suggest that conclusions in a centralized setting might not apply to an FL environment. And it shows different transferability behavior or parameter dependence.
+
+\textbf{Step parameter } Our findings show that common $\alpha$ values have a  negligible effect on the final results, aside from too small or too large values. The reason could be that $\alpha$ similar to  $\epsilon$  bounds the change in each iteration, but generally, its values are one order of magnitude less than $\epsilon$. 
+
+
+\subsection{Efficiency}
+% Attacks can substantially differ in the computational requirements, 
+% which can have practical implications in the MIA domain.
+Our results show that initialization can be influential in computational efficiency. PGD with random intialization requires high computational power wihch migh be burdensome for High-resolution or large-batch training. Using CRN leads to much fewer computational requirements. Single-step attacks can be $20 \sim 30 \times$ less expensive than iterative models with 40 iterations and higher ASR. 
+More minor GPU requirements \\Adversaries might be capable of attacks using high-volumes of data or with multiple devices by using CRN.
+\\Standard ways of simulating attacks, like adaptive models and sanity checks, \cite{carlini2019evaluating} might be unfeasible in their traditional way. An adversary might have more knowledge than what is assumed in evaluation models, hence using more efficient methods or attacks with unexpected devices.
+
+
+
+\subsection{Practical implications and suggestions}
+
+In the following paragraphs, we discuss the motivations that cause adversarial attacks .
+
+The large healthcare economy causes more benefit for malicious behavior, as there are existing reports of pervasive fraud in healthcare. Medical record manipulation for financial purposes \cite{ma2021understanding} fake trial reports\cite{george2015data} in radiology \cite{chowdhry2014image} and pathology\cite{suvarna2001histopathology} are widespread practices, and already made billions of dollars profit \cite{graese2016assessing} for fraudsters. Also, advanced fabrication algorithms and hard to detect methods are always intruguing for fradusters. Existing Manipulations like altering the visual features of images, or using photo editing software, \cite{chowdhry2014image} can result in images of benign subjects classified as malignant.\cite{xia2020pseudo}
+\cite{sun2020adversarial}, but with visual distoration. In contrast, adversarial attacks are imperceptible, do not require manual intervention, and have high transferability. That gives a significant incentive for potential fraudsters to utilize adversarial attacks for high potential revenue. \\For example, consider a hypothetical case in which insurance companies utilize AI-based systems to approve a disease and get refund. A malicious person could add adversarial noise to images to manipulate insurance companies. Or consider if a person tries to bill insurance companies by reporting falsified surgical procedures. They can use attack algorithms to synthesize fake MRI and send it to the target company.
+\\These vulnerabilities have some implications for clinical decision-makers, stakeholders, and insurance companies, who consider deploying FL or AI pipelines , which will be discussed in the following.
+ 
+\begin{enumerate}[(i)]
+    \item  First, they might take the pervasive motivation of manipulation and fraud into consideration, and beware of the financial and incentive \cite{finlayson2019adversarial}
+    \item Second, having secure infrastructure in training phase does not guarantee safety in the deployment phase. So they might distinguish between these two, and consider redundant ways of incorporating AI in their MIA pipelines.
+\item  Third, they might reconsider size and level of trust in collaborative/FL networks. Smaller networks with trusted parties have lower probability of having potential adversary.
+\item Fourth, by not enforcing same data pre-processing pipelines, they might be able to hinder the adversary. They might also consider that having disparate data affects performance or even convergence of FL network.\cite{li2019convergence}. and how should they deal with the compromise between safety and performance.
+\end{enumerate}
+
+\\For developers of MIA systems these findings can have consider four things :
+
+\begin{enumerate}[(i)]
+    \item They can help end-users and clinicians by providing them more information other than model outputs. For example, adding explainable system reports helps the clinicians evaluate the legitimacy of predictions.
+    \item Standard ways of evaluating robustness \cite{carlini2019evaluating}are not recommended in FL setting. so they might consider scenarios where adversary traces the global model, and has more knowledge, or attacks with unexpected devices.
+    \item There is no universal factors to predict the capability of adversary, so they might consider existing research to important factor for each setting, or they might to a brute-force search to find upper-bounds of vulnerability. \cite{carlini2019evaluating} 
+     \item Despite not having a universal defense method, there are limited case-specific defense models shown to work on some datasets, \cite{graese2016assessing} so developers might consider looking into potnetial defense method for their usecase.
+\end{enumerate}
+
+
+
+
+
+% One implication it might give is that, we might increase the robustness of FL network, 
+
+
+\section{Conclusion}
+
+
+This paper investigated adversarial attacks on federated MIA systems and discussed the crucial parameters on their transferability. We also proposed a new method that leverages the federated setting to improve the attack success rate and reduce the computation burden.
+We saw that tuning the parameters can substantially improve transferability.
+We also observed that adequately using noise from previous model updates can effectively improve computational load and has the potential to be well integrated into the existing attack methods.
+
+Future lines of research could be to improve existing defense methods,\cite{sun2019can,wang2020attack,shao2019stochastic,li2019distributed,ma2019privacy,li2020multi ,yin2022adc,zheng2020efficient,yuan2019adversarial,uesato2018adversarial} , towards a universal defense algorithm. Another line of research could be how to utilize distributed nature of FL networks to protect all participating clients, or if collaboration can be used to enhance the current defense methods.\\
+We hope this research could benefit healthcare institutions and hospitals considering bringing in AI or joining FL networks to be warier of the threat of adversarial examples. For medical institutions and managers of hospitals and insurance companies, this research might show that they might pay extra attention to the AI pipelines and FL deployments. This research might help security experts reconsider standard vulnerability analysis and consider different scenarios where a capable adversary proposes fast and efficient attacks. For ML researchers involved in bringing in FL networks, a line of research can devise more reliable defense methods.

@@ -1,0 +1,47 @@
+\section{Related work}
+\label{sec:related}
+
+
+The effect of adversarial attacks on MIA has been studied in several works. Modalities such as chest X-ray, MRI \cite{finlayson2019adversarial,bortsova2021adversarial,asgari2018vulnerability,ma2021understanding} and CT scan
+\cite{navarro2021evaluating}
+  segmentation and classification of medical images are vulnerable to adversarial attacks. \cite{ozbulak2019impact} classification \cite{asgari2018vulnerability}.
+\\Several works worked to discover important parameters on attack transferability.
+\cite{gao2022boosting,elaalami2022bod,dai2021fast,duan2022novel,du2020hybrid,zheng2020efficient,shafahi2019adversarial,qiu2022framework}. Gradients of different samples in one batch\cite{shafahi2019adversarial}, extent of data augmentation \cite{gao2022boosting}, variation in input gradients \cite{qiu2022framework} are shown to be important transferability. Zhang et al. analyized the impact of transfer learning on black-box attack.\cite{zhang2020two}. Another work \cite{zheng2020efficient} utilized the transferability of examples to enhacne  robustness, although their method was proposed for white-box setting. 
+
+% The effectiveness of the above methods is not apparent in the federated setting.
+
+
+
+
+In MIA,  perturbation degree
+has been shown previously as a less explored but highly deterministic parameter in attack setting, and might need visual tuning.\cite{bortsova2021adversarial}. Optimal values of standard black-box\cite{bortsova2021adversarial}, and white-box \cite{ma2021understanding} are domain-specific. Also iteration steps $\alpha$, can be highly deterministic in centralized setting. \cite{tashiro2020diversity} \cite{cai2018curriculum}. 
+% \textbf{Adversarial attacks on Federated learning} 
+ 
+% \\Also, some enhancement methods have been proposed. 
+
+ 
+Methods such to detect the attack
+\cite{yin2021exploiting,drenkow2022attack,ma2021understanding }
+or protect the models from adversaries\cite{lin2021certified,yuan2019adversarial,papernot2017practical,biggio2018wild,li2022review} are also discussed in ML domain.
+ Adding noise to the exchanged model with clipping model updates is effective in several forms of adversarial attacks.\cite{bouacida2021vulnerabilities}. In norm-bound defense, the server enforces an upper-limit norm-bound. Several studies have investigated black-box PGD attacks in an FL environment with norm-bound situation. \cite{sun2019can,wang2020attack} . In the clinical setting,
+% Some models have proposed differentially private settings.
+\cite{shao2019stochastic} DP models are used in clinical EHR data\cite{li2019distributed}  \cite{ma2019privacy} and neuroimaging data \cite{li2020multi} in multi-site setting. 
+
+
+However, other studies have shown that adversary can circumvent the detection if it is aware of it \cite{yin2022adc} , they function in very specific conditions,\cite{yin2022adc}  might have drastic parameter change\cite{zheng2020efficient},or they require too much computational power \cite{yuan2019adversarial,uesato2018adversarial,yin2022adc}. 
+
+
+% and less evaluated in MIA domain.
+% \\\hl{Yejuri in kosshere CVPR ro biar ke na sikh besuze na kabab}
+
+% \\\hl{\faClockO bebin stucking ro mituni biari,Using knowledge from previous rounds / stacing:
+% age na inaro biar:
+% \\\faQuestion Effect of perturbation degree ro kia barresi kardan
+% \\\faQuestion Effect of alpha ro kia barresi kardan
+% }
+% \\\hl{\faClockO Maqalati ke asare noise level be FL tajihan}\\
+% \hl{\faClockO Maqalati sanjidan number of clients ro sanjidan}\\
+% \hl{\faClockO Other attacks on MI has been done}\\
+% \hl{\faClockO Some privacy attacks on FL MI has been done}
+
+

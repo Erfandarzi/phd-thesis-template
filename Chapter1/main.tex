@@ -1,0 +1,312 @@
+%
+% IEEE Transactions on Microwave Theory and Techniques example
+% Tibault Reveyrand - http://www.microwave.fr
+%
+% http://www.microwave.fr/LaTeX.html
+% ---------------------------------------
+
+
+
+% ================================================
+% Please HIGHLIGHT the new inputs such like this :
+% Text :
+%  \hl{comment}
+% Aligned Eq. 
+% \begin{shaded}
+% \end{shaded}
+% ================================================
+
+
+
+\documentclass[journal]{IEEEtran}
+
+% \documentclass[12pt, letterpaper,
+% twoside]{article}
+
+% \usepackage{emoji}
+\usepackage[graphicx]{realboxes}
+%\usepackage[retainorgcmds]{IEEEtrantools}
+%\usepackage{bibentry}  
+\usepackage{xcolor,soul,framed} %,caption
+\usepackage{cite}
+\usepackage{multirow}
+\usepackage{fontawesome}
+\colorlet{shadecolor}{yellow}
+% \usepackage{color,soul}
+% \usepackage[pdftex]{graphicx}
+% \graphicspath{{../pdf/}{../jpeg/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[cmex10]{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref} % For clickable ORCID link
+\usepackage{academicons} % For ORCID icon
+\usepackage{xcolor} % For colors
+\newcommand{\orcidicon}{
+    \begin{tikzpicture}
+    \draw[white, fill=white] (0,0) rectangle (1ex,1ex);
+    \fill[green!60!black] (0, 0) rectangle (1ex, 1ex);
+    \draw[white] (0.5ex, 0.5ex) circle (0.4ex);
+    \draw[white, line width=0.07ex] (0.5ex, 0.5ex) -- ++(60:0.3ex);
+    \draw[white, line width=0.07ex] (0.5ex, 0.5ex) -- ++(0:0.3ex);
+    \draw[white, line width=0.07ex] (0.5ex, 0.5ex) -- ++(-60:0.3ex);
+    \end{tikzpicture}
+}
+%Mathabx do not work on ScribTex => Removed
+%\usepackage{mathabx}
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+\usepackage{comment}
+% \let\hl[1]\includecomment{#1}
+\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+% \newcommand{\hlcyan}[1]{{\sethlcolor{cyan}\hl{#1}}}
+\newcommand\textblue[1]{\textcolor{blue}{#1}}
+\newcommand\textred[1]{\textcolor{red}{#1}}
+\definecolor{orcidgreen}{HTML}{A6CE39}
+
+% \newcommand\myworries[1]{\textcolor{red}{#1}}
+\newcommand{\orcid}[1]{\href{https://orcid.org/#1}{\textcolor{orcidgreen}{\aiOrcid}}}
+
+\newcommand\quickthings[1]{\textblue{\\\faQuestion #1}}
+\newcommand\maybelater[1]{\textred{\\\faClockO#1}}
+% \newcommand\quickthings[1]{\textblue{\\\faQuestion #1}}
+\newcommand\peter[1]{\textcolor{red}{\faComment #1}}
+\newcommand\abs[1]{\\\hl{#1}}
+
+
+
+%Comment to keep todo parts, Uncomment to remove TODO parts!
+\renewcommand\quickthings[1]{}
+% \renewcommand\absolutelynecessary[1]{}
+\renewcommand\peter[1]{}
+\renewcommand\maybelater[1]{}
+\renewcommand\abs[1]{}
+\renewcommand\hl[1]{#1}
+
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+
+
+% % \usepackage
+% \usepackage[ruled,vlined]{algorithm2e}
+% \DeclareMathOperator{\ind}{ind}
+% \DeclareMathOperator{\val}{val}
+% \DeclareMathOperator{\ptr}{ptr}
+% \DeclareMathOperator{\row}{row}
+% \usepackage{algpseudocode}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\bstctlcite{IEEE:BSTcontrol}
+
+
+%=== TITLE & AUTHORS ====================================================================
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+    % \title{Adversarial attacks on federarted learning for medical image analysis}
+    \title{ A Comparative Study of Federated Learning Methods for COVID-19 Detection  }
+ % \author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
+ %        John~Doe,~\IEEEmembership{Fellow,~OSA,}
+ %        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}
+  
+  % \author{Erfan~Darzi\href{https://orcid.org/0000-0002-6003-0119}{\includegraphics[height=1.7ex]{orcid}} ,~\IEEEmembership{Member,~IEEE},
+  % Nanna~M.~Sijtsema\href{https://orcid.org/0000-0001-6644-274X}{\includegraphics[height=1.7ex]{orcid}}, and~P.M.A~van~Ooijen\href{https://orcid.org/0000-0002-8995-1210}{\includegraphics[height=1.7ex]{orcid}},~\IEEEmembership{Senior Member,~IEEE}
+ 
+
+    %   and~Zoya~Popovi\'c,~\IEEEmembership{Fellow,~IEEE}% <-this % stops a space
+% \\\textit{$^{1}$Machine learning lab, Data Science Center in Health (DASH) \\University of Groningen, Hanzeplein 1, Groningen, The Netherlands}
+% \\ e.darzidehkalani@rug.nl
+%   \thanks{ The work of Erfan Darzi was supported by KWF Kankerbestrijding and the Netherlands Organisation for Scientific Research (NWO)  Domain AES, as part of their joint strategic research programme: Technology for Oncology IL. The collaboration project is co-funded by the PPP allowance made available by Health Holland, Top Sector Life Sciences \& Health, to stimulate public-private partnerships. (\textit{Corresponding author: Erfan Darizdehkalani})\\
+%   Erfan Darizdehkalani, Nanna M. Sijtsema, and P.M.A van Ooijen are with the Machine learning lab, Data Science Center in Health (DASH)
+% University of Groningen, Hanzeplein 1, Groningen, The Netherlands.  (e-mail: e.darzidehkalani@rug.nl, n.m.sijtsema@umcg.nl, p.m.a.van.ooijen@umcg.nl)
+  
+% }
+  % \thanks{Erfan Darzidehkalani is with UMCG (e-mail: e.darzidehkalani@umcg.nl).}% <-this % stops a space
+
+% The paper headers
+% \markboth{IEEE TRANSACTIONS ON MICROWAVE THEORY AND TECHNIQUES, VOL.~60, NO.~12, DECEMBER~2012
+% }{Roberg \MakeLowercase{\textit{et al.}}: Cross modality image transformation using cyclic residual
+% architecture and evolutionary algorithm}
+% ===================================================================
+\maketitle
+% === ABSTRACT ====================================================================
+% =================================================================================
+\begin{abstract}
+
+Deep learning has proven to be highly effective in diagnosing COVID-19; however, its efficacy is contingent upon the availability of extensive data for model training. The data sharing among hospitals, which is crucial for training robust models, is often restricted by privacy regulations. Federated learning (FL) emerges as a solution by enabling model training across multiple hospitals while preserving data privacy. However, the deployment of FL can be resource-intensive, necessitating efficient utilization of computational and network resources. In this study, we evaluate the performance and resource efficiency of five FL algorithms in the context of COVID-19 detection using Convolutional Neural Networks (CNNs) in a decentralized setting. The evaluation involves varying the number of participating entities, the number of federated rounds, and the selection algorithms. Our findings indicate that the Cyclic Weight Transfer algorithm exhibits superior performance, particularly when the number of participating hospitals is limited. These insights hold practical implications for the deployment of FL algorithms in COVID-19 detection and broader medical image analysis.
+\end{abstract}
+% \input{Chapter1/2_Relatedworks}
+
+% \input{2.5_Algorithms}
+
+% \input{3_experiment}
+
+% \input{4_results}
+% % \newpage
+
+% \input{5_discussion}
+
+
+
+
+
+
+% === KEYWORDS
+% ====================================================================
+% =================================================================================
+\begin{IEEEkeywords}
+federated learning, medical image analysis, COVID-19, privacy preserving machine learning
+\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+% ====================================================================
+% ====================================================================
+% ====================================================================
+
+
+
+
+
+
+
+
+
+
+% \tableofcontents
+% === I. INTRODUCTION =============================================================
+% =================================================================================
+\section{Introduction}
+
+\IEEEPARstart{C}oronaviruses comprise a family of viruses known to cause respiratory and intestinal illnesses in both humans and animals. Among these viruses, the variants responsible for COVID-19, SARS, and MERS epidemics have gained notable attention. In cases of COVID-19, certain individuals might develop severe complications, including pneumonia, which can be detected through lung CT scans. Studies have indicated that chest imaging plays a crucial role in the diagnosis of COVID-19 in individuals exhibiting severe symptoms. In this domain, deep learning methods, especially Convolutional Neural Networks (CNNs), have proven to be highly effective in assisting radiologists in performing various image analysis tasks related to the diagnosis of COVID-19\cite{kogilavani2022covid}.
+
+Deep learning models developed specifically for detecting COVID-19 infections have exhibited remarkable potential in identifying infected regions in CT scans and X-ray images. However, the training of these deep learning models necessitates access to ample and diverse medical datasets, which are typically collected from multiple sources. A majority of the current approaches rely on a centralized server for aggregating data from various healthcare institutions. This approach poses a challenge, as medical images often contain sensitive and confidential patient information, which is not permissible to share beyond the confines of the originating institution.
+
+Federated learning (FL) emerges as a viable solution to this challenge by decentralizing the training process and retaining the data at its source. In a federated learning framework, distinct clients participate in the training process in a distributed manner using their local data. Specifically, each client independently trains a model utilizing its dataset and subsequently shares the model parameters with other participants. Crucially, the actual data does not leave the local premises, thereby maintaining the confidentiality of sensitive patient information. This approach facilitates collaborative learning without compromising data privacy.
+% the distributed computation and develpmoent of deep learning models ensure the accumulation of knowledge and reaching the full capacity of deep learning models.
+
+FL can differ from centralized data sharing in a number of ways. While both approaches aim to optimize their learning objective, FL algorithms have to account for the fact that communication with clients takes place over unreliable networks with very limited upload speeds. So unlike 
+the centralized setting in which computation is generally a bottleneck, in FL communication might be the bottleneck. 
+
+In this study, a framework was developed to facilitate collaboration among hospitals by employing multiple data sources for the detection of COVID-19 infections via FL. The framework's decentralized data distribution ensures privacy, as data remains stored locally\cite{darzidehkalanifederatedII}.
+
+
+
+
+% There are several ways of doing federated learning since federated learning is performed in a higher level compared to conventional deep learning. There are more parameters of complexity since the model should take into consideration the general and local methods of optimization, data accumulation for all the sites, and local training models. 
+% There are several parameters playing a role in the final performance of a federated learning setting.
+
+ 
+
+
+
+
+
+% It can be spread by human-human interaction. There are several waus tp diagnose COVID-19. Transcription-polymerase chain reaction (RT-PCR) test are one of the most common ways of diagnosing COVID-19. However, there are other ways of diagnosing COVID-19 \cite{rubin2020role}
+% However, due to large number of people having the symptoms and being tested for COVID-19, it might not always be feasible for radiologists to examine large number of patients during the outbreak. Scans of CT and Xray of infected patients have sorts of deformation, misalignment between certain parts, or have pixel intensities different than normal people in infected parts. Observing this misalignment in not an easy task and requires effort and focus from radiologist to correctly distringuish betweeen healthy and infected people. 
+% Instead, 
+% Various architectures of CNN have been tested  and shown a great performance on the imaging datasets. Models such as AlexNet \cite{krizhevsky2012imagenet}
+%  ResNet \cite{he2016deep}  and MobileNet \cite{howard2017mobilenets} could classify thousands of objects belonging to hundreds of classes with the same accuracy as human.
+ 
+
+
+
+% It has also been used to detect COVID-19 from imaging data. Most of the usecases were either for Xray like the researches in 
+% While CT scans can help screen COVID-19 potential infected people, CT scans of other diseases could also have overlapping features with COVID ingected patients. Hence, it is tricky to distinguish COVID infected patients from other types of lung inflammation and requires radiologists level experrtise. The most literature focuses on the ways to better distirnguish COVID infected patients from other diseases, as can be seen in [8], [9], [10], [11], [12]. 
+
+\input{2_Relatedworks}
+
+\input{2.5_Algorithms}
+
+\input{3_experiment}
+
+\input{4_results}
+% \newpage
+
+\input{5_discussion}
+
+
+
+
+
+% \section*{Acknowledgement}
+
+
+
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv}
+
+
+
+\vfill
+% \section{To do list}
+% \subsection{Quick things}
+
+% \subsection{Absolutely necessary}
+
+% %   \item add pathology image to figure perturbation of MRI
+% \subsubsection{Paper}
+% \begin{itemize}
+%     % \item paraphrise + shorten FL and DP sections
+%     % \item baad yebar ba dide Chaoning bekhun
+% \end{itemize}
+% \subsubsection{Coding}
+% \begin{itemize}
+
+% \end{itemize}
+% \subsection{Maybe later}
+% \subsubsection{coding}
+% \maybelater{CWT but with random ordering}
+% \maybelater{One shot FL?}
+% \maybelater{Vazne kamtari dadan be latest client in CWT ?}
+% \maybelater{Testing with other deep networks?}
+% \maybelater{At least you can increase depth of network}
+% \maybelater{Impact of data heterogeneity? just split the data heterogeneously and see how do they work?}
+
+% \maybelater{Effect of Differential privacy?}
+% \maybelater{Effect of pretrained=False?}
+% \maybelater{HasSpike model?}
+% \maybelater{Maybe small variations to generate new models}
+% \maybelater{Maybe doing gradient masked FedAvG?}
+% \maybelater{Maybe evaluating different number of local epochs like https://github.com/siddarth-c/FedGMA}
+% \maybelater{Adding all these ideas to Obsidian/presentations}
+% \maybelater{Going for another paper if an idea is worth pursuing}
+% \maybelater{Another paper: CWT/SWT with DP}
+% \maybelater{Local GD like Ahmed khaled}
+
+% \subsubsection{Paper}
+% \begin{itemize}
+%     \maybelater{Adding mathematical expression of each FL model (good to improve math level of paper)}
+%     \maybelater{maybe adding detailed graph for each participant as an Appendix?}
+%     \maybelater{Adding algorithmic view of each FL alg?}
+  
+% \end{itemize}
+
+
+
+
+
+% that's all folks
+\end{document}
+
+
